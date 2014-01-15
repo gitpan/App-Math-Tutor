@@ -1,0 +1,113 @@
+---
+abstract: 'lets one generate exercises for mathematical topic'
+author:
+  - 'Jens Rehsack <rehsack@cpan.org>'
+build_requires:
+  MooX::Cmd::Tester: 0.007
+  Test::More: 0.90
+configure_requires:
+  Module::Build: 0.42
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4203, CPAN::Meta::Converter version 2.133380'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: App-Math-Tutor
+provides:
+  App::Math::Tutor:
+    file: lib/App/Math/Tutor.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Natural:
+    file: lib/App/Math/Tutor/Cmd/Natural.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Natural::Cmd::Add:
+    file: lib/App/Math/Tutor/Cmd/Natural/Cmd/Add.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Power:
+    file: lib/App/Math/Tutor/Cmd/Power.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Power::Cmd::Rules:
+    file: lib/App/Math/Tutor/Cmd/Power/Cmd/Rules.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Roman:
+    file: lib/App/Math/Tutor/Cmd/Roman.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Roman::Cmd::Add:
+    file: lib/App/Math/Tutor/Cmd/Roman/Cmd/Add.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Roman::Cmd::Cast:
+    file: lib/App/Math/Tutor/Cmd/Roman/Cmd/Cast.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Unit:
+    file: lib/App/Math/Tutor/Cmd/Unit.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Unit::Cmd::Add:
+    file: lib/App/Math/Tutor/Cmd/Unit/Cmd/Add.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Unit::Cmd::Cast:
+    file: lib/App/Math/Tutor/Cmd/Unit/Cmd/Cast.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::Unit::Cmd::Compare:
+    file: lib/App/Math/Tutor/Cmd/Unit/Cmd/Compare.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::VulFrac:
+    file: lib/App/Math/Tutor/Cmd/VulFrac.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::VulFrac::Cmd::Add:
+    file: lib/App/Math/Tutor/Cmd/VulFrac/Cmd/Add.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::VulFrac::Cmd::Cast:
+    file: lib/App/Math/Tutor/Cmd/VulFrac/Cmd/Cast.pm
+    version: 0.003
+  App::Math::Tutor::Cmd::VulFrac::Cmd::Mul:
+    file: lib/App/Math/Tutor/Cmd/VulFrac/Cmd/Mul.pm
+    version: 0.003
+  App::Math::Tutor::Role::DecFrac:
+    file: lib/App/Math/Tutor/Role/DecFrac.pm
+    version: 0.003
+  App::Math::Tutor::Role::DecFracExercise:
+    file: lib/App/Math/Tutor/Role/DecFracExercise.pm
+    version: 0.003
+  App::Math::Tutor::Role::Exercise:
+    file: lib/App/Math/Tutor/Role/Exercise.pm
+    version: 0.003
+  App::Math::Tutor::Role::Natural:
+    file: lib/App/Math/Tutor/Role/Natural.pm
+    version: 0.003
+  App::Math::Tutor::Role::NaturalExercise:
+    file: lib/App/Math/Tutor/Role/NaturalExercise.pm
+    version: 0.003
+  App::Math::Tutor::Role::Power:
+    file: lib/App/Math/Tutor/Role/Power.pm
+    version: 0.003
+  App::Math::Tutor::Role::PowerExercise:
+    file: lib/App/Math/Tutor/Role/PowerExercise.pm
+    version: 0.003
+  App::Math::Tutor::Role::Roman:
+    file: lib/App/Math/Tutor/Role/Roman.pm
+    version: 0.003
+  App::Math::Tutor::Role::Unit:
+    file: lib/App/Math/Tutor/Role/Unit.pm
+    version: 0.003
+  App::Math::Tutor::Role::UnitExercise:
+    file: lib/App/Math/Tutor/Role/UnitExercise.pm
+    version: 0.003
+  App::Math::Tutor::Role::VulFrac:
+    file: lib/App/Math/Tutor/Role/VulFrac.pm
+    version: 0.003
+  App::Math::Tutor::Role::VulFracExercise:
+    file: lib/App/Math/Tutor/Role/VulFracExercise.pm
+    version: 0.003
+requires:
+  Carp: 0
+  File::ShareDir: 1.00
+  LaTeX::Table: v1.0.6
+  MooX::Cmd: 0.007
+  MooX::Options: 4.000
+  Template: 2.25
+  Template::Plugin::Latex: 3.01
+resources:
+  license: http://dev.perl.org/licenses/
+  repository: https://github.com/rehsack/App-Math-Tutor
+version: 0.003

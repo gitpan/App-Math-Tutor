@@ -1,0 +1,20 @@
+Revision history for App-Math-Trainer
+
+0.003	2013-12-23
+    - redesign of guessing exercise values
+    - introduce unit exercises
+    - reduce default amount of exercises
+
+0.002	2013-11-29
+    - convert from App::Cmd to MooX::Cmd and MooX::Options
+    - move to GitHub
+    - format Changes as per CPAN::Changes::Spec
+    - modifying default for range being open to [0:
+    - clean up repository
+    - improve solutions
+
+0.001_002	2010-11-28
+    - Fixing LaTeX a bit to generate nicer results
+
+0.001_001	2010-10-31
+    - First version, released on an unsuspecting world.
