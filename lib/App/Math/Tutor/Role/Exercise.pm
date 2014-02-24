@@ -13,30 +13,31 @@ use Moo::Role;
 use MooX::Options;
 
 use Carp qw(croak);
+use Cwd qw(abs_path getcwd);
 use File::Spec     ();
 use File::ShareDir ();
 use Template       ();
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 =head1 ATTRIBUTES
 
-=head2 amount
+=head2 quantity
 
-Specifies amount of calculations to generate
+Specifies number of calculations to generate
 
 =cut
 
-option amount => (
-                   is       => "ro",
-                   doc      => "Specifies amount of exercises to generate",
-                   long_doc => "Specify amount of exercises to generate. In "
-                     . "case of several kind of exercises, \$amount exercises "
-                     . "are generated per kind.",
-                   format  => "i",
-                   short   => "n",
-                   default => sub { 15 },
-                 );
+option quantity => (
+                     is       => "ro",
+                     doc      => "Specifies number of exercises to generate",
+                     long_doc => "Specify number of exercises to generate. In "
+                       . "case of several kind of exercises, \$quantity exercises "
+                       . "are generated per kind.",
+                     format  => "i",
+                     short   => "n",
+                     default => sub { 15 },
+                   );
 
 =head2 exercises
 
@@ -73,6 +74,14 @@ List of challenges to exercise
 
 List of solutions of challenges
 
+=item usepackages
+
+List of additional package names to pass to \usepackage
+
+=item headeritems
+
+List of additional lines to put to document header
+
 =back
 
 =cut
@@ -103,6 +112,39 @@ sub _build_output_name
     return $cmdnames;
 }
 
+=head2 output_type
+
+Lazy string representing the extension of the output file. The default
+builder returns 'pdf'. Permitted to be set via MooX::Options.
+
+=cut
+
+option output_type => (
+                        is     => "lazy",
+                        doc    => "Specifies the output type (tex, pdf, ps)",
+                        format => "s",
+                        short  => "t",
+                      );
+
+sub _build_output_type { 'pdf' }
+
+=head2 output_location
+
+Lazy string representing the location of the output file in file system. The
+default builder returns the full qualified path name to the current working
+directory. Permitted to be set via MooX::Options.
+
+=cut
+
+option output_location => (
+                            is     => "lazy",
+                            doc    => "Specifies the output location",
+                            format => "s",
+                            short  => "o",
+                          );
+
+sub _build_output_location { abs_path(getcwd) }
+
 =head1 REQUIRED ATTRIBUTES
 
 =head2 template_filename
@@ -132,10 +174,13 @@ sub execute
                                  {
                                     exercises => $exercises,
                                     output    => {
-                                                format => 'pdf',
+                                                format => $self->output_type,
                                               },
                                  },
-                                 $self->output_name . ".pdf"
+                                 File::Spec->catfile(
+                                                 $self->output_location,
+                                                 join( ".", $self->output_name, $self->output_type )
+                                 ),
                                );
     $rc or croak( $template->error() );
 

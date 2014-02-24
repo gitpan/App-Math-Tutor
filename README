@@ -1,55 +1,64 @@
-App-Math-Trainer
+NAME
+    App::Math::Tutor - lets one generate exercises for mathematical topic
 
-The README is used to introduce the module and provide instructions on
-how to install the module, any machine dependencies it may have (for
-example C compilers and installed libraries) and any other information
-that should be provided before the module is installed.
+SYNOPSIS
+      # shows which categories of exercises are supported
+      mtut
+      # shows which exercises for unit calculations can be generated
+      mtut unit
+      # generates 15 addition and subtraction exercises for natural number (15 each)
+      mtut natural add -n 25 -f nnn -r "[0..999"
+      # generates 40 multiplication and division exercises for vulgar fractions (40 each)
+      mtut vulfrac mul -n 40 -f nn/nnn -r "59/999 .. 02/002"
 
-A README file is required for CPAN modules since CPAN extracts the README
-file from a module distribution so that people browsing the archive
-can use it to get an idea of the module's uses. It is usually a good idea
-to provide version information here so that people can decide whether
-fixes for the module are worth downloading.
+DESCRIPTION
+    Provides a command line tool to generate math (calculating) exercides.
 
+AUTHOR
+    Jens Rehsack, "<rehsack at cpan.org>"
 
-INSTALLATION
+BUGS
+    Please report any bugs or feature requests to "bug-app-math-tutor at
+    rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=App-Math-Tutor>. I will
+    be notified, and then you'll automatically be notified of progress on
+    your bug as I make changes.
 
-To install this module, run the following commands:
+SUPPORT
+    You can find documentation for this module with the perldoc command.
 
-	perl Build.PL
-	./Build
-	./Build test
-	./Build install
+        perldoc App::Math::Tutor
 
-SUPPORT AND DOCUMENTATION
+    You can also look for information at:
 
-After installing, you can find documentation for this module with the
-perldoc command.
+    *   RT: CPAN's request tracker
 
-    perldoc App::Math::Trainer
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=App-Math-Tutor>
 
-You can also look for information at:
+    *   AnnoCPAN: Annotated CPAN documentation
 
-    RT, CPAN's request tracker
-        http://rt.cpan.org/NoAuth/Bugs.html?Dist=App-Math-Trainer
+        <http://annocpan.org/dist/App-Math-Tutor>
 
-    AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/App-Math-Trainer
+    *   CPAN Ratings
 
-    CPAN Ratings
-        http://cpanratings.perl.org/d/App-Math-Trainer
+        <http://cpanratings.perl.org/d/App-Math-Tutor>
 
-    Search CPAN
-        http://search.cpan.org/dist/App-Math-Trainer/
+    *   Search CPAN
 
+        <http://search.cpan.org/dist/App-Math-Tutor/>
 
+    I try to answer any support request within a week and tell how fast it's
+    probably solved and a fix is released. However, this is free time and
+    it's spare. Please be patient or buy support to receive an answer in a
+    guaranteed time.
+
+ACKNOWLEDGEMENTS
 LICENSE AND COPYRIGHT
+    Copyright 2010-2014 Jens Rehsack.
 
-Copyright (C) 2010 Jens Rehsack
+    This program is free software; you can redistribute it and/or modify it
+    under the terms of either: the GNU General Public License as published
+    by the Free Software Foundation; or the Artistic License.
 
-This program is free software; you can redistribute it and/or modify it
-under the terms of either: the GNU General Public License as published
-by the Free Software Foundation; or the Artistic License.
-
-See http://dev.perl.org/licenses/ for more information.
+    See http://dev.perl.org/licenses/ for more information.
 

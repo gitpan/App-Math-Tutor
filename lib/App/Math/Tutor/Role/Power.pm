@@ -10,81 +10,16 @@ App::Math::Tutor::Role::Power - role for power mathematics
 =cut
 
 use Moo::Role;
-use MooX::Options;
+use App::Math::Tutor::Numbers;
+use Module::Runtime qw/use_module/;
 
-use Module::Runtime qw/require_module/;
+with "App::Math::Tutor::Role::VulFrac";    # for _check_vulgar_fraction
 
-our $VERSION = '0.003';
-
-require_module 'App::Math::Tutor::Role::VulFrac';    # we only want VulFrac type
-
-{
-    package                                            #
-      Power;
-
-    use Moo;
-    use overload
-      '""'   => \&_stringify,
-      '0+'   => \&_numify,
-      'bool' => sub { 1 },
-      '<=>'  => \&_num_compare;
-
-    use Carp qw/croak/;
-    use Scalar::Util qw/blessed/;
-
-    has basis => (
-                   is       => "ro",
-                   required => 1
-                 );
-
-    has exponent => (
-                      is       => "ro",
-                      required => 1
-                    );
-
-    has mode => (
-                  is      => "rw",
-                  default => sub { 0 },
-                );
-
-    sub _stringify
-    {
-        $_[0]->exponent == 1 and return $_[0]->basis;
-        $_[0]->mode or return join( "^", $_[0]->basis, $_[0]->exponent );
-        return
-          sprintf( "\\sqrt[%s]{%s}",
-                   blessed( $_[0]->exponent ) ? $_[0]->exponent->denum : $_[0]->exponent,
-                   blessed( $_[0]->exponent )
-                     && $_[0]->exponent->num > 1
-                   ? sprintf( "{%s}^{%s}", $_[0]->basis, $_[0]->exponent->num )
-                   : $_[0]->basis );
-    }
-
-    sub _numify
-    {
-        my $rc = eval sprintf( "(%d)**(%d)", $_[0]->basis, $_[0]->exponent );
-        $@ and croak $@;
-        return $rc;
-    }
-
-    sub _num_compare
-    {
-        my ( $self, $other, $swapped ) = @_;
-        $swapped and return $other <=> $self->_numify;
-
-        blessed $other or return $self->_numify <=> $other;
-        return $self->_numify <=> $other->_numify;
-    }
-
-    sub _reduce
-    {
-        die "mising";
-    }
-}
+our $VERSION = '0.004';
 
 sub _check_power_to
 {
-    return $_[0]->basis != 0 and $_[0]->basis != 1;
+    return $_[0]->basis != 0 and $_[0]->basis != 1 and $_[0]->exponent != 0;
 }
 
 has power_types => (
@@ -99,7 +34,7 @@ sub _build_power_types
         {
            name    => "power",
            numbers => 1,
-           builder => sub { return int( rand( $_[0] ) + 1 ); },
+           builder => sub { return int( rand( $_[1] ) + 1 ); },
         },
         {
            name    => "sqrt",
@@ -107,7 +42,7 @@ sub _build_power_types
            builder => sub {
                return
                  VulFrac->new( num   => 1,
-                               denum => int( rand( $_[0] ) + 1 ) );
+                               denum => int( rand( $_[1] ) + 1 ) );
            },
         },
         {
@@ -117,9 +52,9 @@ sub _build_power_types
                my $vf;
                do
                {
-                   $vf = VulFrac->new( num   => int( rand( $_[0] ) + 1 ),
-                                       denum => int( rand( $_[0] ) + 1 ) );
-               } while ( !App::Math::Tutor::Role::VulFrac::_check_vulgar_fraction($vf) );
+                   $vf = VulFrac->new( num   => int( rand( $_[1] ) + 1 ),
+                                       denum => int( rand( $_[1] ) + 1 ) );
+               } while ( !$_[0]->_check_vulgar_fraction($vf) );
                return $vf;
            },
         },
@@ -132,7 +67,7 @@ sub _guess_power_to
     my @types = @{ $_[0]->power_types };
     my $type  = int( rand( scalar @types ) );
     my ( $basis, $exponent ) =
-      ( int( rand($max_basis) ), $types[$type]->{builder}->($max_exponent) );
+      ( int( rand($max_basis) ), $types[$type]->{builder}->( $_[0], $max_exponent ) );
     return
       Power->new(
                   basis    => $basis,
@@ -140,6 +75,14 @@ sub _guess_power_to
                   mode     => int( rand(2) )
                 );
 }
+
+=head1 METHODS
+
+=head2 get_power_to
+
+Returns as many powers as requested. Does Factory :)
+
+=cut
 
 sub get_power_to
 {

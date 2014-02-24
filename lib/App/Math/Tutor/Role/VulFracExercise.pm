@@ -14,7 +14,7 @@ use MooX::Options;
 
 with "App::Math::Tutor::Role::Exercise", "App::Math::Tutor::Role::VulFrac";
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 =head1 ATTRIBUTES
 
@@ -57,6 +57,19 @@ option format => (
     format  => "s",
     short   => "f",
                  );
+
+=head2 negativable
+
+Controls whether fractions can become less 0
+
+=cut
+
+option negativable => (
+                        is          => "ro",
+                        doc         => "Controls whether fractions can become less 0",
+                        default     => sub { 0 },
+                        negativable => 1,
+                      );
 
 =head1 LICENSE AND COPYRIGHT
 

@@ -4,13 +4,13 @@
       "Jens Rehsack <rehsack@cpan.org>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4203",
+   "generated_by" : "Module::Build version 0.4205",
    "license" : [
       "perl_5"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
-      "version" : "2"
+      "version" : 2
    },
    "name" : "App-Math-Tutor",
    "prereqs" : {
@@ -25,11 +25,24 @@
             "Module::Build" : "0.42"
          }
       },
+      "develop" : {
+         "requires" : {
+            "Test::CPAN::Changes" : 0,
+            "Test::CheckManifest" : 0,
+            "Test::Pod" : 0,
+            "Test::Pod::Coverage" : 0,
+            "Test::Pod::Spelling::CommonMistakes" : 0
+         }
+      },
       "runtime" : {
          "requires" : {
             "Carp" : "0",
             "File::ShareDir" : "1.00",
+            "Hash::MoreUtils" : "0",
             "LaTeX::Table" : "v1.0.6",
+            "Math::Complex" : "1.56",
+            "Math::Prime::Util" : "0",
+            "Module::Runtime" : "0",
             "MooX::Cmd" : "0.007",
             "MooX::Options" : "4.000",
             "Template" : "2.25",
@@ -40,115 +53,143 @@
    "provides" : {
       "App::Math::Tutor" : {
          "file" : "lib/App/Math/Tutor.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Natural" : {
          "file" : "lib/App/Math/Tutor/Cmd/Natural.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Natural::Cmd::Add" : {
          "file" : "lib/App/Math/Tutor/Cmd/Natural/Cmd/Add.pm",
-         "version" : "0.003"
+         "version" : "0.004"
+      },
+      "App::Math::Tutor::Cmd::Poly" : {
+         "file" : "lib/App/Math/Tutor/Cmd/Poly.pm",
+         "version" : "0.004"
+      },
+      "App::Math::Tutor::Cmd::Poly::Cmd::Solve" : {
+         "file" : "lib/App/Math/Tutor/Cmd/Poly/Cmd/Solve.pm",
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Power" : {
          "file" : "lib/App/Math/Tutor/Cmd/Power.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Power::Cmd::Rules" : {
          "file" : "lib/App/Math/Tutor/Cmd/Power/Cmd/Rules.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Roman" : {
          "file" : "lib/App/Math/Tutor/Cmd/Roman.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Roman::Cmd::Add" : {
          "file" : "lib/App/Math/Tutor/Cmd/Roman/Cmd/Add.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Roman::Cmd::Cast" : {
          "file" : "lib/App/Math/Tutor/Cmd/Roman/Cmd/Cast.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Unit" : {
          "file" : "lib/App/Math/Tutor/Cmd/Unit.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Unit::Cmd::Add" : {
          "file" : "lib/App/Math/Tutor/Cmd/Unit/Cmd/Add.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Unit::Cmd::Cast" : {
          "file" : "lib/App/Math/Tutor/Cmd/Unit/Cmd/Cast.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::Unit::Cmd::Compare" : {
          "file" : "lib/App/Math/Tutor/Cmd/Unit/Cmd/Compare.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::VulFrac" : {
          "file" : "lib/App/Math/Tutor/Cmd/VulFrac.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::VulFrac::Cmd::Add" : {
          "file" : "lib/App/Math/Tutor/Cmd/VulFrac/Cmd/Add.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::VulFrac::Cmd::Cast" : {
          "file" : "lib/App/Math/Tutor/Cmd/VulFrac/Cmd/Cast.pm",
-         "version" : "0.003"
+         "version" : "0.004"
+      },
+      "App::Math::Tutor::Cmd::VulFrac::Cmd::Compare" : {
+         "file" : "lib/App/Math/Tutor/Cmd/VulFrac/Cmd/Compare.pm",
+         "version" : "0.004"
       },
       "App::Math::Tutor::Cmd::VulFrac::Cmd::Mul" : {
          "file" : "lib/App/Math/Tutor/Cmd/VulFrac/Cmd/Mul.pm",
-         "version" : "0.003"
+         "version" : "0.004"
+      },
+      "App::Math::Tutor::Numbers" : {
+         "file" : "lib/App/Math/Tutor/Numbers.pm",
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::DecFrac" : {
          "file" : "lib/App/Math/Tutor/Role/DecFrac.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::DecFracExercise" : {
          "file" : "lib/App/Math/Tutor/Role/DecFracExercise.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::Exercise" : {
          "file" : "lib/App/Math/Tutor/Role/Exercise.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::Natural" : {
          "file" : "lib/App/Math/Tutor/Role/Natural.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::NaturalExercise" : {
          "file" : "lib/App/Math/Tutor/Role/NaturalExercise.pm",
-         "version" : "0.003"
+         "version" : "0.004"
+      },
+      "App::Math::Tutor::Role::Poly" : {
+         "file" : "lib/App/Math/Tutor/Role/Poly.pm",
+         "version" : "0.004"
+      },
+      "App::Math::Tutor::Role::PolyExercise" : {
+         "file" : "lib/App/Math/Tutor/Role/PolyExercise.pm",
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::Power" : {
          "file" : "lib/App/Math/Tutor/Role/Power.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::PowerExercise" : {
          "file" : "lib/App/Math/Tutor/Role/PowerExercise.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::Roman" : {
          "file" : "lib/App/Math/Tutor/Role/Roman.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::Unit" : {
          "file" : "lib/App/Math/Tutor/Role/Unit.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::UnitExercise" : {
          "file" : "lib/App/Math/Tutor/Role/UnitExercise.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::VulFrac" : {
          "file" : "lib/App/Math/Tutor/Role/VulFrac.pm",
-         "version" : "0.003"
+         "version" : "0.004"
       },
       "App::Math::Tutor::Role::VulFracExercise" : {
          "file" : "lib/App/Math/Tutor/Role/VulFracExercise.pm",
-         "version" : "0.003"
+         "version" : "0.004"
+      },
+      "App::Math::Tutor::Util" : {
+         "file" : "lib/App/Math/Tutor/Util.pm",
+         "version" : "0.004"
       }
    },
    "release_status" : "stable",
@@ -157,8 +198,10 @@
          "http://dev.perl.org/licenses/"
       ],
       "repository" : {
-         "url" : "https://github.com/rehsack/App-Math-Tutor"
+         "type" : "git",
+         "url" : "git://github.com/rehsack/App-Math-Tutor.git",
+         "web" : "https://github.com/rehsack/App-Math-Tutor"
       }
    },
-   "version" : "0.003"
+   "version" : "0.004"
 }

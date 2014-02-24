@@ -16,13 +16,13 @@ with "App::Math::Tutor::Role::Exercise", "App::Math::Tutor::Role::Natural";
 
 use Scalar::Util qw/looks_like_number/;
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 =head1 ATTRIBUTES
 
 =head2 format
 
-Specifies format of numerator/denominator
+Specifies format of operand
 
 =cut
 

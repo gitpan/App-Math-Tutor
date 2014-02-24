@@ -50,7 +50,7 @@
    END;
    usepkgs.join("\n");
 %]
-[% exercises.headeritems.join("\n"); -%]
+[% exercises.headeritems.join('\n'); %]
 
 \begin{document}
 
@@ -69,7 +69,7 @@
 		left = 1,
 		data = exercises.challenges,
 		type = 'longtable',
-		coldef = 'p{8cm}|p{8cm}',
+		coldef = 'p{16cm}',
 #		eor = '\\\\[0.8em]',
  		fontsize = 'footnotesize',
 	      )
@@ -79,14 +79,21 @@
 
 \section{Solution: [% exercises.section %]}
 
+[% solutions = [];
+   FOREACH solution IN exercises.solutions ;
+     sol = solution.join(' \\newline ');
+     solutions.push( [ "$sol \\\\[0.8em] \\hline" ]);
+   END
+-%]
+
 [% Latex.table( caption = "Solution $exercises.caption",
 		label = "solution$exercises.label",
 		header = exercises.header,
 		left = 1,
-		data = exercises.solutions,
+		data = solutions,
 		type = 'longtable',
-		coldef = 'p{8cm}|p{8cm}',
-#		eor = '\\\\[0.8em]',
+		coldef = 'p{16cm}',
+#		eor = '\\\\[0.8em]\\hline',
  		fontsize = 'footnotesize',
 	      )
 -%]

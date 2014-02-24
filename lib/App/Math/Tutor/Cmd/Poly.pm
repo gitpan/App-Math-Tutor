@@ -1,11 +1,11 @@
-package App::Math::Tutor::Cmd::Roman;
+package App::Math::Tutor::Cmd::Poly;
 
 use warnings;
 use strict;
 
 =head1 NAME
 
-App::Math::Tutor::Cmd::Natural - namespace for exercises for roman numbers
+App::Math::Tutor::Cmd::Poly - namespace for exercises for polynoms
 
 =cut
 

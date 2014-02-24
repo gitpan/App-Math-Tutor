@@ -1,4 +1,4 @@
-package App::Math::Tutor::Cmd::Roman::Cmd::Add;
+package App::Math::Tutor::Cmd::VulFrac::Cmd::Compare;
 
 use warnings;
 use strict;
@@ -7,7 +7,7 @@ use vars qw(@ISA $VERSION);
 
 =head1 NAME
 
-App::Math::Tutor::Cmd::Roman::Cmd::Add - Plugin for addition and subtraction of roman numbers
+App::Math::Tutor::Cmd::VulFrac::Cmd::Compare - Plugin for comparing vulgar fractions
 
 =cut
 
@@ -17,41 +17,40 @@ use Moo;
 use MooX::Cmd;
 use MooX::Options;
 
+use Carp qw(croak);
+use File::ShareDir ();
+use Template       ();
+use Scalar::Util qw(looks_like_number);
+
 has template_filename => (
                            is      => "ro",
                            default => "twocols"
                          );
 
-with "App::Math::Tutor::Role::Roman", "App::Math::Tutor::Role::NaturalExercise";
-
-sub _build_command_names
-{
-    return qw(add sub);
-}
+with "App::Math::Tutor::Role::VulFracExercise";
 
 sub _build_exercises
 {
     my ($self) = @_;
 
     my (@tasks);
+
     foreach my $i ( 1 .. $self->quantity )
     {
         my @line;
         foreach my $j ( 0 .. 1 )
         {
-          REDO:
-            my ( $a, $b ) = $self->get_natural_number(2);
-            $j and $a == $b and goto REDO;
+            my ( $a, $b ) = $self->get_vulgar_fractions(2);
             push @line, [ $a, $b ];
         }
         push @tasks, \@line;
     }
 
     my $exercises = {
-                      section    => "Roman number addition / subtraction",
-                      caption    => 'Roman Numeral Addition / Subtraction',
-                      label      => 'roman_numeral_addition',
-                      header     => [ [ 'Roman Number Addition', 'Roman Number Subtraction' ] ],
+                      section => "Vulgar fraction comparison",
+                      caption => 'Vulgar fractions',
+                      label   => 'vulgar_fractions_comparison',
+                      header  => [ [ 'Vulgar fraction Comparison', 'Vulgar fraction Comparison' ] ],
                       solutions  => [],
                       challenges => [],
                     };
@@ -63,15 +62,13 @@ sub _build_exercises
         foreach my $i ( 0 .. 1 )
         {
             my ( $a, $b ) = @{ $line->[$i] };
-            my $op = $i ? '-' : '+';
-            $op eq '-' and $a < $b and ( $b, $a ) = ( $a, $b );
-            push @challenge, sprintf( '$ %s %s %s = $', $a, $op, $b );
+            push( @challenge, "\$ $a \\underbracket[0.5pt]{\\texttt{ }}\\text{ } $b \$" );
 
             my @way;    # remember Frank Sinatra :)
-            push @way, sprintf( '%s %s %s', $a, $op, $b );
-            push @way,
-              RomanNum->new(
-                      value => $op eq "+" ? $a->_numify + $b->_numify : $a->_numify - $b->_numify );
+            my $op = $a <=> $b;
+            $op < 0  and push( @way, "$a < $b" );
+            $op > 0  and push( @way, "$a > $b" );
+            $op == 0 and push( @way, "$a = $b" );
 
             push( @solution, '$ ' . join( " = ", @way ) . ' $' );
         }

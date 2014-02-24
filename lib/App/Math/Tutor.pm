@@ -9,7 +9,7 @@ App::Math::Tutor - lets one generate exercises for mathematical topic
 
 =cut
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 use Moo;
 use MooX::Cmd;
@@ -17,21 +17,24 @@ use MooX::Options;
 
 =head1 SYNOPSIS
 
-  # generates 25 addition and subtraction exercises (25 each)
-  math-train add -n 25 -f nnn:nnn -r "0]..1"
-  # generates 25 multiplication and division exercises (40 each)
-  math-train mul -n 40 -f  nn:nnn -r "0]..1"
+  # shows which categories of exercises are supported
+  mtut
+  # shows which exercises for unit calculations can be generated
+  mtut unit
+  # generates 15 addition and subtraction exercises for natural number (15 each)
+  mtut natural add -n 25 -f nnn -r "[0..999"
+  # generates 40 multiplication and division exercises for vulgar fractions (40 each)
+  mtut vulfrac mul -n 40 -f nn/nnn -r "59/999 .. 02/002"
 
 =head1 DESCRIPTION
 
-Provides a command line tool to generate math (calculating) training
-exercides.
+Provides a command line tool to generate math (calculating) exercides.
 
 =cut
 
 sub execute
 {
-    shift->option_usage();
+    shift->options_usage();
 }
 
 =head1 AUTHOR
@@ -91,7 +94,6 @@ under the terms of either: the GNU General Public License as published
 by the Free Software Foundation; or the Artistic License.
 
 See http://dev.perl.org/licenses/ for more information.
-
 
 =cut
 

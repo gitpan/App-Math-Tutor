@@ -11,16 +11,11 @@ App::Math::Tutor::Cmd::Unit::Cmd::Add - Plugin for addition and subtraction of n
 
 =cut
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 use Moo;
 use MooX::Cmd;
 use MooX::Options;
-
-use Carp qw(croak);
-use File::ShareDir ();
-use Template       ();
-use Scalar::Util qw(looks_like_number);
 
 has template_filename => (
                            is      => "ro",
@@ -35,7 +30,7 @@ sub _build_exercises
 
     my (@tasks);
 
-    foreach my $i ( 1 .. $self->amount )
+    foreach my $i ( 1 .. $self->quantity )
     {
         my @line;
         foreach my $j ( 0 .. 1 )

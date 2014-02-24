@@ -10,97 +10,11 @@ App::Math::Tutor::Role::Unit - role for numererical parts for calculation with u
 =cut
 
 use Moo::Role;
-use MooX::Options;
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 use Hash::MoreUtils qw/slice_def/;
-
-{
-    package    #
-      Unit;
-
-    use Moo;
-    use overload
-      '""'   => \&_stringify,
-      '0+'   => \&_numify,
-      'bool' => \&_filled,
-      '<=>'  => \&_num_compare;
-    use Scalar::Util qw/blessed/;
-
-    has type => (
-                  is       => "ro",
-                  required => 1
-                );
-    has begin => (
-                   is       => "ro",
-                   required => 1
-                 );
-    has end => (
-                 is       => "ro",
-                 required => 1
-               );
-    has parts => (
-                   is       => "ro",
-                   required => 1
-                 );
-
-    sub _stringify
-    {
-        my @parts = @{ $_[0]->parts };
-        my @res;
-        for my $i ( $_[0]->begin .. $_[0]->end )
-        {
-            my $num = shift @parts;
-            $num or next;
-            my $un = $_[0]->type->{spectrum}->[$i]->{unit};
-            $un = "\\text{$un }";
-            push( @res, "$num $un" );
-        }
-        join( " ", @res );
-        #join(" ", @{ $_[0]->parts } );
-    }
-
-    sub _numify
-    {
-        my @parts    = @{ $_[0]->parts };
-        my $base     = $_[0]->type->{base};
-        my $spectrum = $_[0]->type->{spectrum};
-        my $res      = 0;
-        for my $i ( $_[0]->begin .. $_[0]->end )
-        {
-            my $num = shift @parts;
-            $num or next;
-            my $factor = $spectrum->[$i]->{factor};
-            $res = $i <= $base ? $res + $num * $factor : $res + $num / $factor;
-        }
-
-        if ( defined $_[1] )
-        {
-            my $factor = $spectrum->[ $_[1] ]->{factor};
-            $res = $_[1] <= $base ? $res / $factor : $res * $factor;
-        }
-
-        $res;
-    }
-
-    sub _filled
-    {
-        grep { $_ } @{ $_[0]->parts };
-    }
-
-    sub _num_compare
-    {
-        my ( $self, $other, $swapped ) = @_;
-        $swapped and return $other <=> $self->_numify;
-
-        blessed $other or return $self->_numify <=> $other;
-        my $rc;
-        0 != ( $rc = $other->begin <=> $self->begin )
-          and return $rc;    # $self->begin < $other->begin => $self > $other
-        return $self->_numify <=> $other->_numify;
-    }
-}
+use App::Math::Tutor::Numbers;
 
 has unit_definitions => ( is => "lazy" );
 
@@ -267,35 +181,38 @@ sub _guess_unit_number
     $lb == $ub and --$lb;
 
   REDO:
+    my ( $_lb, $_ub ) = ( $lb, $ub );
     my $i;
-    for ( $i = $lb; $i <= $ub; ++$i )
+    for ( $i = $_lb; $i <= $_ub; ++$i )
     {
-        my $max =
-          defined $unit_type->{spectrum}->[$i]->{max} ? $unit_type->{spectrum}->[$i]->{max} : 100;
-        my $min   = $unit_type->{spectrum}->[$i]->{min};
-        my $value = int( rand( $max + $min ) ) - $min;
-        $value or @rc or ++$lb;
-        $value or @rc or next;
-        push( @rc, $value );
+        my ( $min, $max ) = @{ $unit_type->{spectrum}->[$i] }{qw(min max)};
+        defined $max
+          or $max = 100;    # largest unit doesn't have an upper limit - XXX make it user definable
+        push( @rc, int( rand( $max + $min ) ) - $min );
     }
-    while ( !$rc[-1] )
-    {
-        pop @rc;
-        --$ub;
-    }
+    ++$_lb and shift @rc while ( @rc and !$rc[0] );
+    $_ub-- and pop @rc   while ( @rc and !$rc[-1] );
     @rc or goto REDO;
 
     return
       Unit->new(
                  type  => $unit_type,
-                 begin => $lb,
-                 end   => $ub,
+                 begin => $_lb,
+                 end   => $_ub,
                  parts => \@rc
                );
 }
 
 requires "unit_length";
 requires "deviation";
+
+=head1 METHODS
+
+=head2 get_unit_numbers
+
+Returns as many numbers with units as requested. Does Factory :)
+
+=cut
 
 sub get_unit_numbers
 {

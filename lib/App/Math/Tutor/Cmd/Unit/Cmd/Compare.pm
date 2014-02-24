@@ -11,7 +11,7 @@ App::Math::Tutor::Cmd::Unit::Cmd::Compare - Plugin for comparing numbers with un
 
 =cut
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 use Moo;
 use MooX::Cmd;
@@ -35,7 +35,7 @@ sub _build_exercises
 
     my (@tasks);
 
-    foreach my $i ( 1 .. $self->amount )
+    foreach my $i ( 1 .. $self->quantity )
     {
         my @line;
         foreach my $j ( 0 .. 1 )
@@ -62,7 +62,7 @@ sub _build_exercises
         foreach my $i ( 0 .. 1 )
         {
             my ( $a, $b ) = @{ $line->[$i] };
-            push( @challenge, "\$ $a \\underbracket[0.5pt]{\\texttt{ }}\\text{ } $b = \$" );
+            push( @challenge, "\$ $a \\underbracket[0.5pt]{\\texttt{ }}\\text{ } $b \$" );
 
             my @way;    # remember Frank Sinatra :)
             my $op = $a <=> $b;

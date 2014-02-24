@@ -9,7 +9,7 @@ App::Math::Tutor::Cmd::Natural - namespace for exercises for natural numbers
 
 =cut
 
-our $VERSION = '0.003';
+our $VERSION = '0.004';
 
 use Moo;
 use MooX::Cmd;
@@ -17,7 +17,7 @@ use MooX::Options;
 
 sub execute
 {
-    shift->option_usage();
+    shift->options_usage();
 }
 
 =head1 LICENSE AND COPYRIGHT
