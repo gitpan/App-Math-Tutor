@@ -12,7 +12,7 @@ App::Math::Tutor::Role::VulFrac - role for vulgar fraction numbers
 use Moo::Role;
 use App::Math::Tutor::Numbers;
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 sub _check_vulgar_fraction
 {
@@ -29,9 +29,10 @@ sub _guess_vulgar_fraction
       $neg
       ? ( int( rand( $max_num * 2 ) - $max_num ), int( rand( $max_denum * 2 ) - $max_denum ) )
       : ( int( rand($max_num) ), int( rand($max_denum) ) );
-    return
-      VulFrac->new( num   => $num,
-                    denum => $denum );
+    VulFrac->new(
+        num   => $num,
+        denum => $denum
+    );
 }
 
 =head1 METHODS
@@ -58,7 +59,7 @@ sub get_vulgar_fractions
         push @result, $vf;
     }
 
-    return @result;
+    @result;
 }
 
 =head1 LICENSE AND COPYRIGHT

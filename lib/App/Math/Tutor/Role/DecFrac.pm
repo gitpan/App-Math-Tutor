@@ -12,7 +12,7 @@ App::Math::Tutor::Role::DecFrac - role for decimal fraction numbers
 use Moo::Role;
 use App::Math::Tutor::Numbers;
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 requires "range", "digits";
 
@@ -24,10 +24,7 @@ sub _check_decimal_fraction
     $digits += length( "" . int( $_[0] ) ) + 1;
     my $s1 = sprintf( "%.${digits}g", $_[0] );
 
-    return (     $minc->( $minr, $_[0] )
-             and $maxc->( $maxr, $_[0] )
-             and $s1 == $_[0]
-             and length($s1) >= 3 );
+    $minc->( $minr, $_[0] ) and $maxc->( $maxr, $_[0] ) and $s1 == $_[0] and length($s1) >= 3;
 }
 
 =head1 LICENSE AND COPYRIGHT

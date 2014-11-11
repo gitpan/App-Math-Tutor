@@ -16,7 +16,7 @@ with "App::Math::Tutor::Role::Exercise", "App::Math::Tutor::Role::Natural";
 
 use Scalar::Util qw/looks_like_number/;
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 =head1 ATTRIBUTES
 
@@ -50,10 +50,10 @@ option format => (
         my $maxv = $startv . "0" x length($fmtv);
         $maxv;
     },
-    default => sub { return 100; },
+    default => sub { 100 },
     format  => "s",
     short   => "f",
-                 );
+);
 
 =head1 LICENSE AND COPYRIGHT
 

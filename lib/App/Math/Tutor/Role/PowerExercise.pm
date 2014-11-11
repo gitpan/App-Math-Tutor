@@ -14,7 +14,7 @@ use MooX::Options;
 
 with "App::Math::Tutor::Role::Exercise", "App::Math::Tutor::Role::Power";
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 =head1 ATTRIBUTES
 
@@ -53,10 +53,10 @@ option format => (
         my $maxb = $startb . "0" x length($fmtb);
         [ $maxa, $maxb ];
     },
-    default => sub { return [ 20, 10 ]; },
+    default => sub { [ 20, 10 ] },
     format  => "s",
     short   => "f",
-                 );
+);
 
 =head1 LICENSE AND COPYRIGHT
 

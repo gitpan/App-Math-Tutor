@@ -14,7 +14,7 @@ use MooX::Options;
 
 with "App::Math::Tutor::Role::Exercise", "App::Math::Tutor::Role::VulFrac";
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 =head1 ATTRIBUTES
 
@@ -53,10 +53,10 @@ option format => (
         my $maxb = $startb . "0" x length($fmtb);
         [ $maxa, $maxb ];
     },
-    default => sub { return [ 100, 100 ]; },
+    default => sub { [ 100, 100 ]; },
     format  => "s",
     short   => "f",
-                 );
+);
 
 =head2 negativable
 
@@ -65,11 +65,11 @@ Controls whether fractions can become less 0
 =cut
 
 option negativable => (
-                        is          => "ro",
-                        doc         => "Controls whether fractions can become less 0",
-                        default     => sub { 0 },
-                        negativable => 1,
-                      );
+    is          => "ro",
+    doc         => "Controls whether fractions can become less 0",
+    default     => sub { 0 },
+    negativable => 1,
+);
 
 =head1 LICENSE AND COPYRIGHT
 

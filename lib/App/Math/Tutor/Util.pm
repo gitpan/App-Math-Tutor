@@ -13,7 +13,7 @@ use vars qw();
 
 use Exporter;
 
-our $VERSION     = '0.004';
+our $VERSION     = '0.005';
 our @ISA         = qw(Exporter);
 our @EXPORT      = qw();
 our @EXPORT_OK   = qw(sumcat_terms prodcat_terms);
@@ -22,11 +22,11 @@ our %EXPORT_TAGS = ( 'all' => \@EXPORT_OK );
 use Scalar::Util qw/blessed/;
 
 my %sum_opposites = (
-                      '+'   => '-',
-                      '-'   => '+',
-                      '\pm' => '\mp',
-                      '\mp' => '\pm',
-                    );
+    '+'   => '-',
+    '-'   => '+',
+    '\pm' => '\mp',
+    '\mp' => '\pm',
+);
 
 =head1 EXPORTS
 
@@ -68,9 +68,9 @@ sub sumcat_terms
 }
 
 my %prod_ops = (
-                 '*' => '\cdot',
-                 '/' => '\div',
-               );
+    '*' => '\cdot',
+    '/' => '\div',
+);
 
 =head2 prodcat_terms
 

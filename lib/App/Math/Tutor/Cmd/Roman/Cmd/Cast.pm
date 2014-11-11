@@ -11,16 +11,16 @@ App::Math::Tutor::Cmd::Roman::Cmd::Cast - Plugin for casting of roman numerals i
 
 =cut
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 use Moo;
 use MooX::Cmd;
 use MooX::Options;
 
 has template_filename => (
-                           is      => "ro",
-                           default => "twocols"
-                         );
+    is      => "ro",
+    default => "twocols"
+);
 
 with "App::Math::Tutor::Role::Roman", "App::Math::Tutor::Role::NaturalExercise";
 
@@ -41,13 +41,13 @@ sub _build_exercises
     }
 
     my $exercises = {
-                      section    => "Roman number cast from/to natural number",
-                      caption    => 'Roman Numerals Casting',
-                      label      => 'roman_number_cast',
-                      header     => [ [ 'Cast From Roman Number', 'Cast Into Roman Number' ] ],
-                      solutions  => [],
-                      challenges => [],
-                    };
+        section    => "Roman number cast from/to natural number",
+        caption    => 'Roman Numerals Casting',
+        label      => 'roman_number_cast',
+        header     => [ [ 'Cast From Roman Number', 'Cast Into Roman Number' ] ],
+        solutions  => [],
+        challenges => [],
+    };
 
     foreach my $line (@tasks)
     {
@@ -74,7 +74,7 @@ sub _build_exercises
         push( @{ $exercises->{challenges} }, \@challenge );
     }
 
-    return $exercises;
+    $exercises;
 }
 
 =head1 LICENSE AND COPYRIGHT

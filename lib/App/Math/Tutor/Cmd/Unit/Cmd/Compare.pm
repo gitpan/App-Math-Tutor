@@ -11,7 +11,7 @@ App::Math::Tutor::Cmd::Unit::Cmd::Compare - Plugin for comparing numbers with un
 
 =cut
 
-our $VERSION = '0.004';
+our $VERSION = '0.005';
 
 use Moo;
 use MooX::Cmd;
@@ -23,9 +23,9 @@ use Template       ();
 use Scalar::Util qw(looks_like_number);
 
 has template_filename => (
-                           is      => "ro",
-                           default => "twocols"
-                         );
+    is      => "ro",
+    default => "twocols"
+);
 
 with "App::Math::Tutor::Role::UnitExercise";
 
@@ -47,13 +47,13 @@ sub _build_exercises
     }
 
     my $exercises = {
-                      section    => "Unit comparison",
-                      caption    => 'Units',
-                      label      => 'unit_comparison',
-                      header     => [ [ 'Unit Comparison', 'Unit Comparison' ] ],
-                      solutions  => [],
-                      challenges => [],
-                    };
+        section    => "Unit comparison",
+        caption    => 'Units',
+        label      => 'unit_comparison',
+        header     => [ [ 'Unit Comparison', 'Unit Comparison' ] ],
+        solutions  => [],
+        challenges => [],
+    };
 
     foreach my $line (@tasks)
     {
@@ -77,7 +77,7 @@ sub _build_exercises
         push( @{ $exercises->{challenges} }, \@challenge );
     }
 
-    return $exercises;
+    $exercises;
 }
 
 =head1 LICENSE AND COPYRIGHT
